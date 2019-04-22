@@ -5,18 +5,22 @@ import { addContact } from './actions';
 class ContacNew extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      contact: {
-        name: '',
-        phone: '',
-        email: ''
-      }
-    };
+    this.state = this.getInitialState();
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handlePhoneChange = this.handlePhoneChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  getInitialState() {
+    return {
+      contact: {
+        name: '',
+        phone: '',
+        email: ''
+      }
+    }
   }
 
   handleNameChange(event) {
@@ -33,17 +37,13 @@ class ContacNew extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    this.props.dispatch(addContact(this.state.contact));
+    this.props.addContact(this.state.contact);
+    this.setState(this.getInitialState());
   }
 
   render() {
-    const list = this.props.contacts.map((contact, index) =>
-      <p key={index}>{contact.name}</p>
-    )
-
     return(
       <div>
-        {list}
         <form onSubmit={this.onSubmit}>
           <label htmlFor="contactName">Name:</label>
           <input type="text" name="contactName" value={this.state.contact.name} onChange={this.handleNameChange} /><br/>
@@ -58,8 +58,8 @@ class ContacNew extends Component {
   }
 }
 
-const mapStateToProps = store => ({
-  contacts: store.contacts
+const mapDispatchToProps = dispatch => ({
+  addContact: contact => dispatch(addContact(contact))
 })
 
-export default connect(mapStateToProps)(ContacNew);
+export default connect(null, mapDispatchToProps)(ContacNew);

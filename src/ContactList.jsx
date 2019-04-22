@@ -4,13 +4,26 @@ import { connect } from 'react-redux';
 class ContacList extends Component {
   render() {
     const list = this.props.contacts.map((contact, index) =>
-      <p key={index}>{contact.name}</p>
+      <tr key={index}>
+        <td>{contact.name}</td>
+        <td>{contact.phone}</td>
+        <td>{contact.email}</td>
+      </tr>
     )
 
     return(
-      <div>
-        {list}
-      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {list}
+        </tbody>
+      </table>
     )
   }
 }
