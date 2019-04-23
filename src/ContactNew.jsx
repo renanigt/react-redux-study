@@ -60,6 +60,6 @@ class ContacNew extends Component {
 
 const mapDispatchToProps = dispatch => ({
   addContact: contact => dispatch(addContact(contact))
-})
+});
 
 export default connect(null, mapDispatchToProps)(ContacNew);

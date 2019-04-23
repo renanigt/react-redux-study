@@ -9,6 +9,10 @@ const contacts = (state = [], action) => {
           email: action.email
         }
       ]
+    case 'REMOVE_CONTACT':
+      return [
+        ...state.filter((elem, index, arr) => index !== action.index)
+      ]
     default:
       return state;
   }
