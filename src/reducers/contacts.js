@@ -4,6 +4,7 @@ const contacts = (state = [], action) => {
       return [
         ...state,
         {
+          id: action.id,
           name: action.name,
           phone: action.phone,
           email: action.email
@@ -11,7 +12,7 @@ const contacts = (state = [], action) => {
       ]
     case 'REMOVE_CONTACT':
       return [
-        ...state.filter((elem, index, arr) => index !== action.index)
+        ...state.filter((elem, index, arr) => elem.id !== action.id)
       ]
     default:
       return state;
